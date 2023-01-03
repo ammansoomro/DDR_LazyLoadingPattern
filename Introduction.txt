@@ -1,0 +1,13 @@
+Lazy loading is a design pattern that aims to improve the performance and efficiency of an application by deferring the loading of certain resources until they are needed. This can be particularly useful in web applications, where it can be used to reduce the initial load time of a page by only loading the resources that are required to render the visible content, rather than loading all resources upfront.
+
+There are several ways to implement lazy loading in a web application. One common method is to use JavaScript to listen for scroll events on the page, and to load the necessary resources when the user scrolls to the point where they are needed. This can be done using a library or framework such as LazyLoad or IntersectionObserver.
+
+Another method is to use the loading attribute on the img tag, which allows the developer to specify a placeholder image that should be displayed while the actual image is being loaded. Once the actual image has finished loading, it will replace the placeholder image.
+
+Lazy loading can also be implemented on the server side, using techniques such as pagination or infinite scroll. In these cases, the server will only send a certain number of resources at a time, and will only send more resources when the user requests them, such as by clicking a "Load More" button.
+
+There are several benefits to using lazy loading in a web application. By deferring the loading of non-critical resources until they are needed, it can help to reduce the initial load time of the page and improve overall performance. It can also reduce the amount of data that needs to be transmitted over the network, which can be especially important for users on mobile devices or with limited data plans.
+
+However, there are also some potential drawbacks to using lazy loading. It can create a less seamless user experience, as the user may need to wait for resources to load as they are needed. Additionally, implementing lazy loading can require a significant amount of additional development and testing effort, as it requires the application to be designed in a way that allows resources to be loaded on demand.
+
+In conclusion, lazy loading is a useful design pattern that can help to improve the performance and efficiency of a web application by deferring the loading of non-critical resources until they are needed. While it can require additional development and testing effort, the benefits can be significant, particularly in terms of reduced initial load time and improved overall performance.
