@@ -1,0 +1,38 @@
+Here is an example of how lazy loading could be implemented in a web application using the JavaScript IntersectionObserver API:
+
+
+
+// Select all of the images on the page
+const images = document.querySelectorAll('img');
+
+// Set up the IntersectionObserver
+const observer = new IntersectionObserver((entries) => {
+  // For each intersecting element
+  entries.forEach((entry) => {
+    // If the element is intersecting
+    if (entry.isIntersecting) {
+      // Get the image src attribute
+      const src = entry.target.getAttribute('data-src');
+      // Set the src attribute to the data-src value
+      entry.target.setAttribute('src', src);
+      // Stop observing the element
+      observer.unobserve(entry.target);
+    }
+  });
+});
+
+// Observe each image
+images.forEach((image) => {
+  observer.observe(image);
+});
+
+
+This code uses the IntersectionObserver API to listen for scroll events on the page and determine when an image is in the viewport. When an image is in the viewport, the code sets the src attribute of the image to the value of the data-src attribute, which should contain the actual source of the image. This causes the image to be loaded and displayed on the page.
+
+Here is an example of how the HTML for an image might look using this lazy loading implementation:
+
+<img data-src="image.jpg" alt="A description of the image">
+
+In this example, the src attribute of the img tag is not set, and instead the actual source of the image is stored in the data-src attribute. When the image comes into view, the src attribute is set to the value of the data-src attribute, causing the image to be loaded and displayed on the page.
+
+This lazy loading implementation has the advantage of being relatively simple and easy to implement, and it can improve the initial load time of a web page by only loading the images that are needed to render the visible content of the page. However, it does require the use of JavaScript and may not be compatible with all browsers.

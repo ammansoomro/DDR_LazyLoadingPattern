@@ -1,0 +1,6 @@
+Cohesion refers to the degree to which the elements of a system or module work together to achieve a single, well-defined purpose. In the context of lazy loading, high cohesion would mean that the different elements of the lazy loading implementation, such as the code that listens for scroll events and the code that loads the resources, are closely related and work together effectively to achieve the goal of deferred resource loading.
+
+Coupling refers to the degree to which one module or system relies on or is connected to another module or system. In the context of lazy loading, low coupling would mean that the lazy loading implementation is not closely connected or reliant on other parts of the system, and can be easily modified or replaced without affecting the rest of the application.
+
+In general, it is desirable to have high cohesion and low coupling in a computer system, as this can make the system more modular, flexible, and easier to maintain. In the case of lazy loading, high cohesion would mean that the different elements of the implementation work well together to achieve the goal of deferred resource loading, while low coupling would mean that the implementation is not closely connected to other parts of the system and can be easily modified or replaced.
+
