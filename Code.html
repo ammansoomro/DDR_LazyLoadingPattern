@@ -2,162 +2,291 @@
 <html>
   <head>
     <style>
-      .lazy-loading-container {
-        height: 300px;
-        overflow: auto;
+      *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        
       }
- 
+
+      body{
+        background-color: #060509;
+        color: rgb(236, 233, 233);
+        font-family: sans-serif;
+
+      }
+
+      .scroll-down{
+        position: absolute;
+        bottom: 20;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        cursor: pointer;
+        z-index: 100;
+        /* Increase the font-size and make it look like a stylish banner */
+        font-size: 1.5rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1rem;
+        animation: scroll-down 1s infinite;
+        padding: 50px;
+
+        /* Make the glow animation transition smooth */
+        transition: all 1s ease-in-out;
+
+
+      }
+
+      @keyframes scroll-down {
+        0% {
+          opacity: 0;
+
+          text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        
+
+        }
+        50% {
+          opacity: 1;
+          text-shadow: 0 0 20px rgba(255, 255, 255, 0);
+        }
+        100% {
+          opacity: 0;
+          text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+
+      }
+
+      .lazy-loading-container {
+        height: 80vh;
+        overflow: auto;
+        border: 1px solid black;
+        scroll-snap-type: y mandatory;
+        scroll-behavior: smooth;
+        scroll-padding-top: 100px;
+        overscroll-behavior: contain;
+        overscroll-behavior-y: contain;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
       .lazy-loading-row {
         height: 50px;
-        background-color: lightgray;
+        width: 100%;
+        background-color: #5C4987;
         margin: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        scroll-snap-align: start;
+        gap: 30px;
+        color: #DF9588;
       }
+
+      .lazy-loading-row:nth-child(odd) {
+        background-color: #DF9588;
+        color: #5C4987;
+      }
+
+      .rollno{
+        /* Make the font small and move this div to the bottom left corner, and flex-coloum the childs */
+        font-size: 0.8rem;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding: 10px;
+        /* Make the glow animation transition smooth */
+        transition: all 1s ease-in-out;
+
+      }
+
+      .RowData{
+        width: inherit;
+        display: flex;
+      }
+      /* RowData First Child left 2 child middle */
+      .RowData > *:first-child{
+        width: 20%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        /* Make the glow animation transition smooth */
+        transition: all 1s ease-in-out;
+
+      }
+
+      .RowData > *:nth-child(2){
+        width: 60%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        /* Make the glow animation transition smooth */
+        transition: all 1s ease-in-out;
+
+      }
+
     </style>
   </head>
   <body>
-    <div class="lazy-loading-container">
-    </div>
+    <div class="lazy-loading-container"></div>
 
     <script>
       // Dummy data for the user rows
-const userData = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-  { id: 3, name: 'Charlie' },
-  { id: 4, name: 'David' },
-  { id: 5, name: 'Eve' },
-  { id: 6, name: 'Frank' },
-  { id: 7, name: 'Grace' },
-  { id: 8, name: 'Henry' },
-  { id: 9, name: 'Iris' },
-  { id: 10, name: 'Jack' },
-  { id: 11, name: 'Karen' },
-  { id: 12, name: 'Laura' },
-  { id: 13, name: 'Mike' },
-  { id: 14, name: 'Nancy' },
-  { id: 15, name: 'Olivia' },
-  { id: 16, name: 'Pat' },
-  { id: 17, name: 'Quincy' },
-  { id: 18, name: 'Rachel' },
-  { id: 19, name: 'Sam' },
-  { id: 20, name: 'Tara' },
-  { id: 21, name: 'Ursula' },
-  { id: 22, name: 'Vincent' },
-  { id: 23, name: 'Wendy' },
-  { id: 24, name: 'Xander' },
-  { id: 25, name: 'Yvonne' },
-  { id: 26, name: 'Zach' },
-  { id: 27, name: 'Ava' },
-  { id: 28, name: 'Ben' },
-  { id: 29, name: 'Carla' },
-  { id: 30, name: 'Dan' },
-  { id: 31, name: 'Emma' },
-  { id: 32, name: 'Fiona' },
-  { id: 33, name: 'Greta' },
-  { id: 34, name: 'Hannah' },
-  { id: 35, name: 'Ian' },
-  { id: 36, name: 'Jasmine' },
-  { id: 37, name: 'Kate' },
-  { id: 38, name: 'Liam' },
-  { id: 39, name: 'Mia' },
-  { id: 40, name: 'Nate' },
-  { id: 41, name: 'Owen' },
-  { id: 42, name: 'Pam' },
-  { id: 43, name: 'Quinn' },
-  { id: 44, name: 'Rita' },
-  { id: 45, name: 'Steve' },
-  { id: 46, name: 'Tina' },
-  { id: 47, name: 'Uma' },
-  { id: 48, name: 'Violet' },
-  { id: 49, name: 'Will' },
-  { id: 50, name: 'Xena' },
-  { id: 51, name: 'Yolanda' },
-  { id: 52, name: 'Zane' },
-  { id: 53, name: 'Abby' },
-  { id: 54, name: 'Brett' },
-  { id: 55, name: 'Caroline' },
-  { id: 56, name: 'Drew' },
-  { id: 57, name: 'Ella' },
-  { id: 58, name: 'Frankie' },
-  { id: 59, name: 'Gina' },
-  { id: 60, name: 'Hannah' },
-  { id: 61, name: 'Ian' },
-  { id: 62, name: 'Jenny' },
-  { id: 63, name: 'Karen' },
-  { id: 64, name: 'Liam' },
-  { id: 65, name: 'Megan' },
-  { id: 66, name: 'Nina' },
-  { id: 67, name: 'Olivia' },
-  { id: 68, name: 'Pat' },
-  { id: 69, name: 'Quinn' },
-  { id: 70, name: 'Rachel' },
-  { id: 71, name: 'Sam' },
-  { id: 72, name: 'Tara' },
-  { id: 73, name: 'Ursula' },
-  { id: 74, name: 'Vincent' },
-  { id: 75, name: 'Wendy' },
-  { id: 76, name: 'Xander' },
-  { id: 77, name: 'Yvonne' },
-  { id: 78, name: 'Zach' },
-  { id: 79, name: 'Ava' },
-  { id: 80, name: 'Ben' },
-  { id: 81, name: 'Carla' },
-  { id: 82, name: 'Dan' },
-  { id: 83, name: 'Emma' },
-  { id: 84, name: 'Fiona' },
-  { id: 85, name: 'Greta' },
-  { id: 86, name: 'Hannah' },
-  { id: 87, name: 'Ian' },
-  { id: 88, name: 'Jasmine' },
-  { id: 89, name: 'Kate' },
-  { id: 90, name: 'Liam' },
-  { id: 91, name: 'Mia' },
-  { id: 92, name: 'Nate' },
-  { id: 93, name: 'Owen' },
-  { id: 94, name: 'Pam' },
-  { id: 95, name: 'Quinn' },
-  { id: 96, name: 'Rita' },
-  { id: 97, name: 'Steve' },
-  { id: 98, name: 'Tina' },
-  { id: 99, name: 'Uma' },
-  { id: 100, name: 'Violet' },
-];
+      const userData = [
+        { id: 1, name: "Alice" },
+        { id: 2, name: "Bob" },
+        { id: 3, name: "Charlie" },
+        { id: 4, name: "David" },
+        { id: 5, name: "Eve" },
+        { id: 6, name: "Frank" },
+        { id: 7, name: "Grace" },
+        { id: 8, name: "Henry" },
+        { id: 9, name: "Iris" },
+        { id: 10, name: "Jack" },
+        { id: 11, name: "Karen" },
+        { id: 12, name: "Laura" },
+        { id: 13, name: "Mike" },
+        { id: 14, name: "Nancy" },
+        { id: 15, name: "Olivia" },
+        { id: 16, name: "Pat" },
+        { id: 17, name: "Quincy" },
+        { id: 18, name: "Rachel" },
+        { id: 19, name: "Sam" },
+        { id: 20, name: "Tara" },
+        { id: 21, name: "Ursula" },
+        { id: 22, name: "Vincent" },
+        { id: 23, name: "Wendy" },
+        { id: 24, name: "Xander" },
+        { id: 25, name: "Yvonne" },
+        { id: 26, name: "Zach" },
+        { id: 27, name: "Ava" },
+        { id: 28, name: "Ben" },
+        { id: 29, name: "Carla" },
+        { id: 30, name: "Dan" },
+        { id: 31, name: "Emma" },
+        { id: 32, name: "Fiona" },
+        { id: 33, name: "Greta" },
+        { id: 34, name: "Hannah" },
+        { id: 35, name: "Ian" },
+        { id: 36, name: "Jasmine" },
+        { id: 37, name: "Kate" },
+        { id: 38, name: "Liam" },
+        { id: 39, name: "Mia" },
+        { id: 40, name: "Nate" },
+        { id: 41, name: "Owen" },
+        { id: 42, name: "Pam" },
+        { id: 43, name: "Quinn" },
+        { id: 44, name: "Rita" },
+        { id: 45, name: "Steve" },
+        { id: 46, name: "Tina" },
+        { id: 47, name: "Uma" },
+        { id: 48, name: "Violet" },
+        { id: 49, name: "Will" },
+        { id: 50, name: "Xena" },
+        { id: 51, name: "Yolanda" },
+        { id: 52, name: "Zane" },
+        { id: 53, name: "Abby" },
+        { id: 54, name: "Brett" },
+        { id: 55, name: "Caroline" },
+        { id: 56, name: "Drew" },
+        { id: 57, name: "Ella" },
+        { id: 58, name: "Frankie" },
+        { id: 59, name: "Gina" },
+        { id: 60, name: "Hannah" },
+        { id: 61, name: "Ian" },
+        { id: 62, name: "Jenny" },
+        { id: 63, name: "Karen" },
+        { id: 64, name: "Liam" },
+        { id: 65, name: "Megan" },
+        { id: 66, name: "Nina" },
+        { id: 67, name: "Olivia" },
+        { id: 68, name: "Pat" },
+        { id: 69, name: "Quinn" },
+        { id: 70, name: "Rachel" },
+        { id: 71, name: "Sam" },
+        { id: 72, name: "Tara" },
+        { id: 73, name: "Ursula" },
+        { id: 74, name: "Vincent" },
+        { id: 75, name: "Wendy" },
+        { id: 76, name: "Xander" },
+        { id: 77, name: "Yvonne" },
+        { id: 78, name: "Zach" },
+        { id: 79, name: "Ava" },
+        { id: 80, name: "Ben" },
+        { id: 81, name: "Carla" },
+        { id: 82, name: "Dan" },
+        { id: 83, name: "Emma" },
+        { id: 84, name: "Fiona" },
+        { id: 85, name: "Greta" },
+        { id: 86, name: "Hannah" },
+        { id: 87, name: "Ian" },
+        { id: 88, name: "Jasmine" },
+        { id: 89, name: "Kate" },
+        { id: 90, name: "Liam" },
+        { id: 91, name: "Mia" },
+        { id: 92, name: "Nate" },
+        { id: 93, name: "Owen" },
+        { id: 94, name: "Pam" },
+        { id: 95, name: "Quinn" },
+        { id: 96, name: "Rita" },
+        { id: 97, name: "Steve" },
+        { id: 98, name: "Tina" },
+        { id: 99, name: "Uma" },
+        { id: 100, name: "Violet" },
+      ];
 
       // Function to get the data for a row
       function getRowData(rowNumber) {
         const user = userData[rowNumber];
-        return `<div>ID: ${user.id}</div><div>Name: ${user.name}</div>`;
+        return `<div class="RowData"><div> ${user.id}</div><div>${user.name}</div> </div>`;
       }
 
       // Function to load rows when they are scrolled into view
       function loadRows(entries) {
-        entries.forEach(entry => {
-          // If the row is in the viewport, load it
+        entries.forEach((entry) => {
+          // If the row is in the viewport, load it, and add a little delay of 0.5 seconds
           if (entry.isIntersecting) {
-            const row = entry.target;
-            // load the data for the row and append it to the container
-            const data = getRowData(row.dataset.rowNumber);
-            row.innerHTML = data;
+            const rowNumber = entry.target.dataset.rowNumber;
+            setTimeout(() => {
+              entry.target.innerHTML = getRowData(rowNumber);
+            }, 500);
           }
         });
       }
 
       // Create an IntersectionObserver instance
       const observer = new IntersectionObserver(loadRows, {
-        root: document.querySelector('.lazy-loading-container'),
+        root: document.querySelector(".lazy-loading-container"),
       });
 
       // Create the rows and add them to the container
       for (let i = 0; i < 100; i++) {
-        const row = document.createElement('div');
-        row.classList.add('lazy-loading-row');
+        const row = document.createElement("div");
+        row.classList.add("lazy-loading-row");
         row.dataset.rowNumber = i;
-        document.querySelector('.lazy-loading-container').appendChild(row);
+        document.querySelector(".lazy-loading-container").appendChild(row);
       }
 
       // Observe the rows
-      const rows = document.querySelectorAll('.lazy-loading-row');
-      rows.forEach(row => observer.observe(row));
+      const rows = document.querySelectorAll(".lazy-loading-row");
+      rows.forEach((row) => observer.observe(row));
     </script>
+    <!-- Div that has text "Scroll Down, to load more" -->
+    <div class="scroll-down">Scroll Down, to load more</div>
+    <div class="rollno">
+      <div>K191048 - Amman Soomro</div>
+      <div>K191118 - Naba Jafri</div>
+    </div>
   </body>
 </html>
