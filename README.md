@@ -12,3 +12,6 @@ Additionally, a scroll-down button is provided at the bottom center of the page,
 
 ## Poster and Screenshots
 ![LAZY LOADING](https://github.com/ammansoomro/Lazy-Loading-Pattern/assets/63865428/237ed451-a6f6-4f9f-869b-aa1b8ad26ee4)
+
+
+<img width="1440" alt="Screenshot 2023-05-11 at 1 22 02 AM" src="https://github.com/ammansoomro/Lazy-Loading-Pattern/assets/63865428/9b56e3a9-b859-4259-8bdc-7692facd48e5">
