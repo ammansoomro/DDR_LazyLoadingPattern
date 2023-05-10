@@ -13,9 +13,9 @@ Additionally, a scroll-down button is provided at the bottom center of the page,
 ## Technologies Used
 This project uses the following technologies:
 
-HTML5
-CSS3
-JavaScript
+- HTML5
+- CSS3
+- JavaScript
 
 ## Poster and Screenshots
 ![LAZY LOADING](https://github.com/ammansoomro/Lazy-Loading-Pattern/assets/63865428/237ed451-a6f6-4f9f-869b-aa1b8ad26ee4)
