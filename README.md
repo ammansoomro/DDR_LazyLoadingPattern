@@ -1,4 +1,4 @@
-# Lazy-Loading-Pattern
+# ScrollSnapShowcase: Lazy-Loading-Pattern
 This is a small webpage built with HTML and CSS to showcase a lazy-loading container with rows of user data. It uses CSS animations and scroll-snap to provide a smooth and interactive experience to the user
 
 ## Installation
